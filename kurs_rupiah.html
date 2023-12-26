@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    label {
+      margin-bottom: 10px;
+    }
+
+    select, input, button {
+      margin-bottom: 20px;
+      padding: 8px;
+    }
+
+    #result {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Currency Converter</h2>
+
+  <label for="currency">Choose a currency:</label>
+  <select id="currency">
+    <option value="usd">USD (US Dollar)</option>
+    <option value="eur">EUR (Euro)</option>
+    <!-- Add more currency options as needed -->
+  </select>
+
+  <br>
+
+  <label for="amount">Enter the amount:</label>
+  <input type="number" id="amount" placeholder="Enter amount">
+
+  <br>
+
+  <button onclick="convertCurrency()">Convert</button>
+
+  <br>
+
+  <div id="result">Converted amount: </div>
+
+  <script>
+    function convertCurrency() {
+      var currencyElement = document.getElementById("currency");
+      var amountElement = document.getElementById("amount");
+      var resultElement = document.getElementById("result");
+
+      var currency = currencyElement.value;
+      var amount = parseFloat(amountElement.value);
+
+      // Exchange rates (sample rates, you can update them accordingly)
+      var exchangeRates = {
+        usd: 14000, // 1 USD to IDR
+        eur: 16000, // 1 EUR to IDR
+        // Add more exchange rates as needed
+      };
+
+      if (!isNaN(amount)) {
+        if (exchangeRates.hasOwnProperty(currency)) {
+          var convertedAmount = amount * exchangeRates[currency];
+          resultElement.textContent = "Converted amount: " + convertedAmount.toLocaleString("id-ID") + " IDR";
+        } else {
+          resultElement.textContent = "Invalid currency selection";
+        }
+      } else {
+        resultElement.textContent = "Please enter a valid amount";
+      }
+    }
+  </script>
+
+</body>
+</html>
